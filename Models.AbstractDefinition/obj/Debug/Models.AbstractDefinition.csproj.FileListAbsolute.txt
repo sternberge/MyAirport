@@ -1,0 +1,8 @@
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\bin\Debug\Models.AbstractDefinition.dll
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\bin\Debug\Models.AbstractDefinition.pdb
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\bin\Debug\Entities.dll
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\bin\Debug\Entities.pdb
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\obj\Debug\Models.AbstractDefinition.csprojResolveAssemblyReference.cache
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\obj\Debug\Models.AbstractDefinition.csproj.CoreCompileInputs.cache
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\obj\Debug\Models.AbstractDefinition.dll
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.AbstractDefinition\obj\Debug\Models.AbstractDefinition.pdb

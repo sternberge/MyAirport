@@ -1,0 +1,10 @@
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\bin\Debug\Models.Natif.dll
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\bin\Debug\Models.Natif.pdb
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\bin\Debug\Entities.dll
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\bin\Debug\Models.AbstractDefinition.dll
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\bin\Debug\Entities.pdb
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\bin\Debug\Models.AbstractDefinition.pdb
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.csprojResolveAssemblyReference.cache
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.csproj.CoreCompileInputs.cache
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.dll
+C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.pdb
