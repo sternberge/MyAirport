@@ -8,3 +8,13 @@ C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.c
 C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.csproj.CoreCompileInputs.cache
 C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.dll
 C:\Users\Joseph\source\repos\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.pdb
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\bin\Debug\Models.Natif.dll
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\bin\Debug\Models.Natif.pdb
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\bin\Debug\Entities.dll
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\bin\Debug\Models.AbstractDefinition.dll
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\bin\Debug\Entities.pdb
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\bin\Debug\Models.AbstractDefinition.pdb
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.csprojResolveAssemblyReference.cache
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.csproj.CoreCompileInputs.cache
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.dll
+C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Models.Natif\obj\Debug\Models.Natif.pdb
