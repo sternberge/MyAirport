@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.FormIhm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace MyAirport.Pim.Models
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new PIM());
         }
     }
 }

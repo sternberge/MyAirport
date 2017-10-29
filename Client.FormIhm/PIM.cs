@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyAirport.Pim.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +28,24 @@ namespace Client.FormIhm
 
         void PIM_PimStateChanged(object sender, PimState state)
         {
-            MessageBox.Show("StateChanged");
+            switch (State)
+            {
+                case PimState.AffichageBagage:
+                    //AffichageBagage();
+                    break;
+                case PimState.AttenteBagage:
+                    //AttenteBagage();
+                    break;
+                case PimState.CreationBagage:
+                    //CreationBagage();
+                    break;
+                case PimState.SelectionBagage:
+                    //SelectionBagage();
+                    break;
+                default:
+                    //Deconnecter();
+                    break;
+            }
         }
 
 
@@ -79,6 +97,11 @@ namespace Client.FormIhm
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var bagages = Factory.Model.GetBagage(textBox1.Text);
         }
     }
 }
