@@ -49,6 +49,14 @@ namespace Client.FormIhm
         }
 
 
+        public void AffichageBagage()
+        {
+            this.recherche.Visible = false;
+            this.resultat.Visible = false;
+            this.bagage.Visible = false;
+        }
+
+
         private void PIM_Load(object sender, EventArgs e)
         {
             
@@ -101,7 +109,41 @@ namespace Client.FormIhm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var bagages = Factory.Model.GetBagage(textBox1.Text);
+            try
+            {
+                var bagages = Factory.Model.GetBagage(Convert.ToInt32(textBox1.Text));
+            if (bagages != null)
+            {
+                this.textBox2.Text = bagages.Compagnie.ToString();
+                this.textBox2.Enabled = false;
+                this.textBox5.Text = bagages.DateVol.ToString();
+                this.textBox5.Enabled = false;
+                this.textBox6.Text = bagages.Itineraire.ToString();
+                this.textBox6.Enabled = false;
+                //this.textBox7.Text = bagag
+                if (bagages.EnContinuation)
+                {
+                    this.continuation.Checked = true;
+                    this.continuation.Enabled = false;
+                }
+            }
+                else
+                {
+                    MessageBox.Show("Code Id incorrect");
+                    this.textBox2.Text = String.Empty;
+                    this.textBox2.Enabled = true;
+                    this.textBox5.Text = String.Empty;
+                    this.textBox5.Enabled = true;
+                    this.textBox6.Text = String.Empty;
+                    this.textBox6.Enabled = true;
+                    //this.textBox7.Text = bagag
+                }
+            }
+            
+            catch(Exception exception)
+            {
+                MessageBox.Show("Error occurs");
+            }
         }
     }
 }
