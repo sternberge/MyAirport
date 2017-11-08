@@ -31,7 +31,7 @@ namespace Client.FormIhm
             switch (State)
             {
                 case PimState.AffichageBagage:
-                    //AffichageBagage();
+                    AffichageBagage();
                     break;
                 case PimState.AttenteBagage:
                     //AttenteBagage();
@@ -51,9 +51,29 @@ namespace Client.FormIhm
 
         public void AffichageBagage()
         {
-            this.recherche.Visible = false;
-            this.resultat.Visible = false;
-            this.bagage.Visible = false;
+            this.recherche.Visible = true;
+            this.resultat.Visible = true;
+            this.bagage.Visible = true;
+            this.textBox2.Enabled = false;
+            this.textBox3.Enabled = false;
+            this.textBox4.Enabled = false;
+            this.textBox5.Enabled = false;
+            this.textBox6.Enabled = false;
+            this.textBox7.Enabled = false;
+        }
+
+        public void CreationBagage()
+        {
+            this.recherche.Visible = true;
+            this.resultat.Visible = true;
+            this.bagage.Visible = true;
+            this.textBox1.Enabled = false;
+            this.textBox2.Enabled = true;
+            this.textBox3.Enabled = true;
+            this.textBox4.Enabled = true;
+            this.textBox5.Enabled = true;
+            this.textBox6.Enabled = true;
+            this.textBox7.Enabled = true;
         }
 
 
@@ -111,9 +131,12 @@ namespace Client.FormIhm
         {
             try
             {
-                var bagages = Factory.Model.GetBagage(Convert.ToInt32(textBox1.Text));
-            if (bagages != null)
+                List <MyAirport.Pim.Entities.BagageDefinition> maListeBagage = new List<MyAirport.Pim.Entities.BagageDefinition> ();
+                maListeBagage = Factory.Model.GetBagage((textBox1.Text));
+                
+            if (maListeBagage.Count > 0)
             {
+                var bagages = maListeBagage[0];
                 this.textBox2.Text = bagages.Compagnie.ToString();
                 this.textBox2.Enabled = false;
                 this.textBox5.Text = bagages.DateVol.ToString();
@@ -129,13 +152,14 @@ namespace Client.FormIhm
             }
                 else
                 {
-                    MessageBox.Show("Code Id incorrect");
+                    MessageBox.Show("Code Iata incorrect");
                     this.textBox2.Text = String.Empty;
                     this.textBox2.Enabled = true;
                     this.textBox5.Text = String.Empty;
                     this.textBox5.Enabled = true;
                     this.textBox6.Text = String.Empty;
                     this.textBox6.Enabled = true;
+                    this.AffichageBagage();
                     //this.textBox7.Text = bagag
                 }
             }
