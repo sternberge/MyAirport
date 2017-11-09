@@ -1,4 +1,6 @@
-﻿namespace Client.FormIhm
+﻿using System;
+
+namespace Client.FormIhm
 {
     partial class PIM
     {
@@ -332,6 +334,16 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

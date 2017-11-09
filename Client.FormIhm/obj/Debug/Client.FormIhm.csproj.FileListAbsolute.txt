@@ -29,13 +29,3 @@ C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.P
 C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Client.FormIhm.exe.config
 C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Client.FormIhm.exe
 C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Client.FormIhm.pdb
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Entities.dll
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.AbstractDefinition.dll
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.Factory.dll
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.Sql.dll
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.Natif.dll
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Entities.pdb
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.AbstractDefinition.pdb
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.Factory.pdb
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.Sql.pdb
-C:\Users\Aurélien\Documents\ING5\DotNet\MyAirport.PimversionChachou\MyAirport.Pim\Client.FormIhm\bin\Debug\Models.Natif.pdb

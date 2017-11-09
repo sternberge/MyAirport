@@ -13,6 +13,8 @@ namespace Client.FormIhm
 {
     public partial class PIM : Form
     {
+        ServiceReferencePim.ServicePimClient proxy = null;
+
         private PimState state = PimState.Deconnecter;
         private PimState State
         {
@@ -24,6 +26,8 @@ namespace Client.FormIhm
         {
             InitializeComponent();
             this.PimStateChanged += PIM_PimStateChanged;
+            proxy = new ServiceReferencePim.ServicePimClient();
+            
         }
 
         void PIM_PimStateChanged(object sender, PimState state)
@@ -60,6 +64,9 @@ namespace Client.FormIhm
             this.textBox5.Enabled = false;
             this.textBox6.Enabled = false;
             this.textBox7.Enabled = false;
+            this.textBox2.Text = String.Empty;
+            this.textBox5.Text = String.Empty;
+            this.textBox6.Text = String.Empty;
         }
 
         public void CreationBagage()
@@ -97,46 +104,17 @@ namespace Client.FormIhm
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Vol_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Bagage_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                List <MyAirport.Pim.Entities.BagageDefinition> maListeBagage = new List<MyAirport.Pim.Entities.BagageDefinition> ();
-                maListeBagage = Factory.Model.GetBagage((textBox1.Text));
-                
-            if (maListeBagage.Count > 0)
+                Client.FormIhm.ServiceReferencePim.BagageDefinition monBagage = proxy.GetBagageByCodeIataAsync(this.textBox1.Text).Result;
+
+                if (monBagage != null)
             {
-                var bagages = maListeBagage[0];
+                var bagages = monBagage;
                 this.textBox2.Text = bagages.Compagnie.ToString();
                 this.textBox2.Enabled = false;
                 this.textBox5.Text = bagages.DateVol.ToString();
@@ -152,13 +130,7 @@ namespace Client.FormIhm
             }
                 else
                 {
-                    MessageBox.Show("Code Iata incorrect");
-                    this.textBox2.Text = String.Empty;
-                    this.textBox2.Enabled = true;
-                    this.textBox5.Text = String.Empty;
-                    this.textBox5.Enabled = true;
-                    this.textBox6.Text = String.Empty;
-                    this.textBox6.Enabled = true;
+                    MessageBox.Show("Code Iata incorrect");                   
                     this.AffichageBagage();
                     //this.textBox7.Text = bagag
                 }

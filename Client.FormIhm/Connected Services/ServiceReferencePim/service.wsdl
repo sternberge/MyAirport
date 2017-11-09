@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServicePim" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/MyAirport.Pim.Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicePim_GetBagageById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBagageById" />
+  </wsdl:message>
+  <wsdl:message name="IServicePim_GetBagageById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBagageByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePim_GetBagageByCodeIata_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBagageByCodeIata" />
+  </wsdl:message>
+  <wsdl:message name="IServicePim_GetBagageByCodeIata_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBagageByCodeIataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePim_CreateBagage_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateBagage" />
+  </wsdl:message>
+  <wsdl:message name="IServicePim_CreateBagage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateBagageResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicePim">
+    <wsdl:operation name="GetBagageById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePim/GetBagageById" message="tns:IServicePim_GetBagageById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePim/GetBagageByIdResponse" message="tns:IServicePim_GetBagageById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBagageByCodeIata">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePim/GetBagageByCodeIata" message="tns:IServicePim_GetBagageByCodeIata_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePim/GetBagageByCodeIataResponse" message="tns:IServicePim_GetBagageByCodeIata_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateBagage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePim/CreateBagage" message="tns:IServicePim_CreateBagage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePim/CreateBagageResponse" message="tns:IServicePim_CreateBagage_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicePim" type="tns:IServicePim">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBagageById">
+      <soap:operation soapAction="http://tempuri.org/IServicePim/GetBagageById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBagageByCodeIata">
+      <soap:operation soapAction="http://tempuri.org/IServicePim/GetBagageByCodeIata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateBagage">
+      <soap:operation soapAction="http://tempuri.org/IServicePim/CreateBagage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicePim">
+    <wsdl:port name="BasicHttpBinding_IServicePim" binding="tns:BasicHttpBinding_IServicePim">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/ServicePim/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

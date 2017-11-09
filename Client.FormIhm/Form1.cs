@@ -24,14 +24,14 @@ namespace MyAirport.Pim.Models
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var bagages = Factory.Model.GetBagage("015730437700");
-            Console.WriteLine(bagages.First().DateVol);
+            /*var bagages = Factory.Model.GetBagage("015730437700");
+            Console.WriteLine(bagages.First().DateVol);*/
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var bagage = Factory.Model.GetBagage(24387299);
-            Console.WriteLine(bagage.DateVol);
+            /*var bagage = Factory.Model.GetBagage(24387299);
+            Console.WriteLine(bagage.DateVol);*/
         }
     }
 }
