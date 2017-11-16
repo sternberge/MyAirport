@@ -25,7 +25,7 @@ namespace MyAirport.Pim.Models
                             singleton = new MyAirport.Pim.Models.Natif();
                             break;
                         default:
-                            singleton = new MyAirport.Pim.Models.Natif();
+                            singleton = new MyAirport.Pim.Models.Sql();
                             break;
                     }
                 }
