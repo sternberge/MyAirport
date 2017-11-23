@@ -15,7 +15,8 @@ namespace MyAirport.Pim.Service
     {
         public int CreateBagage(BagageDefinition bag)
         {
-            throw new NotImplementedException();
+            Factory.Model.CreateBagage(bag);
+            return 0;
         }
 
         public BagageDefinition GetBagageByCodeIata(string codeIata)
@@ -33,5 +34,7 @@ namespace MyAirport.Pim.Service
             return MyAirport.Pim.Models.Factory.Model.GetBagage(idBagage);
         }
 
+
+        
     }
 }

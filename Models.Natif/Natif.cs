@@ -23,5 +23,10 @@ namespace MyAirport.Pim.Models
             // throw new NotImplementedException();
         }
 
+        public override int CreateBagage(BagageDefinition bag)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

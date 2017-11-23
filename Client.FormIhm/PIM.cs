@@ -38,24 +38,43 @@ namespace Client.FormIhm
                     AffichageBagage();
                     break;
                 case PimState.AttenteBagage:
-                    //AttenteBagage();
+                    AttenteBagage();
                     break;
                 case PimState.CreationBagage:
-                    //CreationBagage();
+                    CreationBagage();
                     break;
                 case PimState.SelectionBagage:
-                    //SelectionBagage();
+                    SelectionBagage();
                     break;
                 default:
-                    //Deconnecter();
+                    Deconnecter();
                     break;
             }
+        }
+
+        public void AttenteBagage()
+        {
+            this.recherche.Visible = true;
+            this.resultat.Visible = true;
+            this.bagage.Visible = true;
+            this.textBox1.Enabled = false;
+            this.textBox2.Enabled = false;
+            this.textBox3.Enabled = false;
+            this.textBox4.Enabled = false;
+            this.textBox5.Enabled = false;
+            this.textBox6.Enabled = false;
+            this.textBox7.Enabled = false;
+            this.textBox2.Text = String.Empty;
+            this.textBox5.Text = String.Empty;
+            this.textBox6.Text = String.Empty;
+            this.Creer.Enabled = false;
+
         }
 
 
         public void AffichageBagage()
         {
-            this.recherche.Visible = true;
+            this.recherche.Visible = false;
             this.resultat.Visible = true;
             this.bagage.Visible = true;
             this.textBox2.Enabled = false;
@@ -67,6 +86,38 @@ namespace Client.FormIhm
             this.textBox2.Text = String.Empty;
             this.textBox5.Text = String.Empty;
             this.textBox6.Text = String.Empty;
+            this.Creer.Enabled = false;
+            this.checkBox1.Enabled = false;
+            this.rush.Enabled = false;
+            this.continuation.Enabled = false;
+        }
+
+        public void Deconnecter()
+        {
+            this.recherche.Visible = false;
+            this.resultat.Visible = false;
+            this.bagage.Visible = false;
+        }
+
+        public void SelectionBagage()
+        {
+            this.button1.Enabled = true;
+            this.textBox1.Enabled = true;
+            this.recherche.Visible = true;
+            this.textBox2.Enabled = false;
+            this.textBox3.Enabled = false;
+            this.textBox4.Enabled = false;
+            this.textBox5.Enabled = false;
+            this.textBox6.Enabled = false;
+            this.textBox7.Enabled = false;
+            this.textBox2.Text = String.Empty;
+            this.textBox5.Text = String.Empty;
+            this.textBox6.Text = String.Empty;
+            this.continuation.Enabled = false;
+            this.rush.Enabled = false;
+            this.button1.Enabled = true;
+            this.Creer.Enabled = false;
+
         }
 
         public void CreationBagage()
@@ -74,13 +125,17 @@ namespace Client.FormIhm
             this.recherche.Visible = true;
             this.resultat.Visible = true;
             this.bagage.Visible = true;
-            this.textBox1.Enabled = false;
+            this.textBox1.Enabled = true;
             this.textBox2.Enabled = true;
             this.textBox3.Enabled = true;
             this.textBox4.Enabled = true;
             this.textBox5.Enabled = true;
             this.textBox6.Enabled = true;
             this.textBox7.Enabled = true;
+            this.continuation.Enabled = true;
+            this.rush.Enabled = true;
+            this.button1.Enabled = false;
+            this.Creer.Enabled = true;
         }
 
 
@@ -113,37 +168,89 @@ namespace Client.FormIhm
                 Client.FormIhm.ServiceReferencePim.BagageDefinition monBagage = proxy.GetBagageByCodeIataAsync(this.textBox1.Text).Result;
 
                 if (monBagage != null)
-            {
-                var bagages = monBagage;
-                this.textBox2.Text = bagages.Compagnie.ToString();
-                this.textBox2.Enabled = false;
-                this.textBox5.Text = bagages.DateVol.ToString();
-                this.textBox5.Enabled = false;
-                this.textBox6.Text = bagages.Itineraire.ToString();
-                this.textBox6.Enabled = false;
-                //this.textBox7.Text = bagag
-                if (bagages.EnContinuation)
                 {
-                    this.continuation.Checked = true;
-                    this.continuation.Enabled = false;
+                    this.OnPimStateChanged(PimState.AffichageBagage);
+                    var bagages = monBagage;
+                    this.textBox2.Text = bagages.Compagnie.ToString();
+                    this.textBox2.Enabled = false;
+                    this.textBox5.Text = bagages.DateVol.ToString();
+                    this.textBox5.Enabled = false;
+                    this.textBox6.Text = bagages.Itineraire.ToString();
+                    this.textBox6.Enabled = false;
+                    if (bagages.EnContinuation)
+                    {
+                        this.continuation.Checked = true;
+                        this.continuation.Enabled = false;
+                    }
                 }
-            }
                 else
                 {
-                    MessageBox.Show("Code Iata incorrect");                   
-                    this.AffichageBagage();
-                    //this.textBox7.Text = bagag
+                    MessageBox.Show("Code Iata incorrect");
+                    this.OnPimStateChanged(PimState.SelectionBagage);                   
                 }
             }
             
             catch(Exception exception)
             {
+                this.OnPimStateChanged(PimState.Deconnecter);
                 MessageBox.Show("Error occurs");
             }
         }
 
-        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+       
+
+        private void réinitialiserToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.OnPimStateChanged(PimState.SelectionBagage);
+            //this.SelectionBagage();
+        }
+
+        private void CreateBagage_Click(object sender, EventArgs e)
+        {
+            this.OnPimStateChanged(PimState.CreationBagage);
+            //this.CreationBagage();
+        }
+
+        private void FindBagage_Click(object sender, EventArgs e)
+        {
+            this.OnPimStateChanged(PimState.SelectionBagage);
+            //this.SelectionBagage();
+        }
+
+        private void déconnecterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.OnPimStateChanged(PimState.Deconnecter);
+        }
+
+        private void Creer_Click(object sender, EventArgs e)
+        {
+            Client.FormIhm.ServiceReferencePim.BagageDefinition bagage = new Client.FormIhm.ServiceReferencePim.BagageDefinition();
+            bagage.Compagnie = this.textBox2.Text.Substring(0,3);
+            bagage.DateVol = DateTime.ParseExact(this.textBox5.Text, "yyyy-MM-dd",
+                                     System.Globalization.CultureInfo.InvariantCulture); ;
+            //Récupère seulement les trois premieres lettres de la destination
+            bagage.Itineraire = this.textBox6.Text.Substring(0,3);
+            bagage.Ligne = this.textBox3.Text.Substring(0, 5);
+            bagage.Itineraire = this.textBox6.Text;
+            //bagage.classe
+            bagage.CodeIata = this.textBox1.Text;
+
+            if (this.checkBox1.Checked)
+                bagage.Prioritaire = true;
+            else
+                bagage.Prioritaire = false;
+
+            if (this.rush.Checked)
+                bagage.Rush = true;
+            else bagage.Rush = false;
+
+            if (this.continuation.Checked)
+                bagage.EnContinuation = true;
+            else bagage.EnContinuation = false;
+
+
+            int idBagage = proxy.CreateBagage(bagage);
+
 
         }
     }

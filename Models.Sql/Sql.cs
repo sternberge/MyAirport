@@ -29,9 +29,13 @@ namespace MyAirport.Pim.Models
             "LEFT OUTER JOIN COMPAGNIE_CLASSE cc on cc.ID_COMPAGNIE = c.ID_COMPAGNIE and cc.CLASSE = b.CLASSE " +
             "WHERE b.id_bagage = @id";
 
+        string cmdCreateBagageString =
+            "INSERT INTO BAGAGE(CODE_IATA, ORIGINE_CREATION, DATE_CREATION, CLASSE, PRIORITAIRE, STA, LOCAL_TRANFERT, ISUR, DESTINATION, ESCALE, EMB, RECOLE, COMPAGNIE, LIGNE, JOUR_EXPLOITATION, CONTINUATION, DCS_EMETTEUR, ORIGINE_SAFIR, EN_CONTINUATION, EN_TRANSFERT)"
+            + "VALUES(@codeIata, 'D',@dateCreation, 'Y', @prioritaire, 'B', 'T', 0, @itineraire, 'MIA', 1, 0, @compagnie, @ligne, 17, @continuation, 'SB46', 0, 0, 0); SELECT SCOPE_IDENTITY()";
+        string cmdCreateBagageString2 = "INSERT INTO BAGAGE_A_POUR_PARTICULARITE VALUES (@idBagage, @particularite)";
+
         public override BagageDefinition GetBagage(int idBagage)
         {
-
             BagageDefinition bagRes = null;
             using (SqlConnection cnx = new SqlConnection(strCnx))
             {
@@ -103,6 +107,38 @@ namespace MyAirport.Pim.Models
                 return bagsRes;
             }
                 //throw new NotImplementedException();
+        }
+
+        public override int CreateBagage(BagageDefinition monBagage)
+        {
+            
+            using (SqlConnection cnx = new SqlConnection(strCnx))
+            {
+                SqlCommand cmd = new SqlCommand(this.cmdCreateBagageString, cnx);
+                SqlCommand cmd2 = new SqlCommand(this.cmdCreateBagageString2, cnx);
+                cmd.Parameters.AddWithValue("@codeIata", monBagage.CodeIata);
+                cmd.Parameters.AddWithValue("@dateCreation", (System.Data.SqlTypes.SqlDateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"))));
+                if(monBagage.Prioritaire)
+                    cmd.Parameters.AddWithValue("@prioritaire", 1);
+                else cmd.Parameters.AddWithValue("@prioritaire", 0);
+
+
+                cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire);
+                cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie);
+                cmd.Parameters.AddWithValue("@ligne", monBagage.Ligne);
+                if(monBagage.EnContinuation)
+                    cmd.Parameters.AddWithValue("@continuation", 'Y');
+                else
+                    cmd.Parameters.AddWithValue("@continuation", 'N');
+                cmd2.Parameters.AddWithValue("@idBagage", monBagage.IdBagage);
+                cmd2.Parameters.AddWithValue("@particulatite", 15);
+                cnx.Open();
+                cmd.ExecuteScalar();
+                //cmd2.ExecuteScalar();
+
+                cnx.Close();
+            }
+                return 0;
         }
     }
 }

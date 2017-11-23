@@ -33,6 +33,10 @@ namespace Client.FormIhm
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.commandesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.réinitialiserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.déconnecterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.etatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateBagage = new System.Windows.Forms.ToolStripMenuItem();
+            this.FindBagage = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -42,6 +46,7 @@ namespace Client.FormIhm
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.resultat = new System.Windows.Forms.GroupBox();
             this.bagage = new System.Windows.Forms.GroupBox();
+            this.Creer = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.rush = new System.Windows.Forms.CheckBox();
@@ -56,6 +61,7 @@ namespace Client.FormIhm
             this.jour = new System.Windows.Forms.Label();
             this.ligne = new System.Windows.Forms.Label();
             this.compagnie = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.recherche.SuspendLayout();
@@ -68,7 +74,8 @@ namespace Client.FormIhm
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.commandesToolStripMenuItem});
+            this.commandesToolStripMenuItem,
+            this.etatToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(866, 28);
@@ -78,7 +85,8 @@ namespace Client.FormIhm
             // commandesToolStripMenuItem
             // 
             this.commandesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.réinitialiserToolStripMenuItem});
+            this.réinitialiserToolStripMenuItem,
+            this.déconnecterToolStripMenuItem});
             this.commandesToolStripMenuItem.Name = "commandesToolStripMenuItem";
             this.commandesToolStripMenuItem.Size = new System.Drawing.Size(104, 24);
             this.commandesToolStripMenuItem.Text = "Commandes";
@@ -86,8 +94,40 @@ namespace Client.FormIhm
             // réinitialiserToolStripMenuItem
             // 
             this.réinitialiserToolStripMenuItem.Name = "réinitialiserToolStripMenuItem";
-            this.réinitialiserToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.réinitialiserToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
             this.réinitialiserToolStripMenuItem.Text = "Réinitialiser";
+            this.réinitialiserToolStripMenuItem.Click += new System.EventHandler(this.réinitialiserToolStripMenuItem_Click);
+            // 
+            // déconnecterToolStripMenuItem
+            // 
+            this.déconnecterToolStripMenuItem.Name = "déconnecterToolStripMenuItem";
+            this.déconnecterToolStripMenuItem.Size = new System.Drawing.Size(168, 26);
+            this.déconnecterToolStripMenuItem.Text = "Déconnecter";
+            this.déconnecterToolStripMenuItem.Click += new System.EventHandler(this.déconnecterToolStripMenuItem_Click);
+            // 
+            // etatToolStripMenuItem
+            // 
+            this.etatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CreateBagage,
+            this.FindBagage});
+            this.etatToolStripMenuItem.Name = "etatToolStripMenuItem";
+            this.etatToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.etatToolStripMenuItem.Text = "Etat";
+            // 
+            // CreateBagage
+            // 
+            this.CreateBagage.Name = "CreateBagage";
+            this.CreateBagage.Size = new System.Drawing.Size(178, 26);
+            this.CreateBagage.Tag = "";
+            this.CreateBagage.Text = "CreateBagage";
+            this.CreateBagage.Click += new System.EventHandler(this.CreateBagage_Click);
+            // 
+            // FindBagage
+            // 
+            this.FindBagage.Name = "FindBagage";
+            this.FindBagage.Size = new System.Drawing.Size(178, 26);
+            this.FindBagage.Text = "FindBagage";
+            this.FindBagage.Click += new System.EventHandler(this.FindBagage_Click);
             // 
             // statusStrip1
             // 
@@ -115,7 +155,6 @@ namespace Client.FormIhm
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(150, 20);
             this.toolStripStatusLabel2.Text = "Etat";
-            this.toolStripStatusLabel2.Click += new System.EventHandler(this.toolStripStatusLabel2_Click);
             // 
             // recherche
             // 
@@ -134,16 +173,16 @@ namespace Client.FormIhm
             // 
             this.button1.Location = new System.Drawing.Point(707, 26);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(103, 53);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Rechercher";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 26);
+            this.label1.Location = new System.Drawing.Point(18, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 17);
             this.label1.TabIndex = 1;
@@ -152,7 +191,7 @@ namespace Client.FormIhm
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(102, 26);
+            this.textBox1.Location = new System.Drawing.Point(111, 41);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(537, 22);
             this.textBox1.TabIndex = 0;
@@ -171,6 +210,8 @@ namespace Client.FormIhm
             // 
             // bagage
             // 
+            this.bagage.Controls.Add(this.checkBox1);
+            this.bagage.Controls.Add(this.Creer);
             this.bagage.Controls.Add(this.textBox7);
             this.bagage.Controls.Add(this.textBox6);
             this.bagage.Controls.Add(this.rush);
@@ -184,6 +225,16 @@ namespace Client.FormIhm
             this.bagage.TabIndex = 1;
             this.bagage.TabStop = false;
             this.bagage.Text = "Bagage";
+            // 
+            // Creer
+            // 
+            this.Creer.Location = new System.Drawing.Point(266, 259);
+            this.Creer.Name = "Creer";
+            this.Creer.Size = new System.Drawing.Size(143, 54);
+            this.Creer.TabIndex = 6;
+            this.Creer.Text = "Créer";
+            this.Creer.UseVisualStyleBackColor = true;
+            this.Creer.Click += new System.EventHandler(this.Creer_Click);
             // 
             // textBox7
             // 
@@ -202,7 +253,7 @@ namespace Client.FormIhm
             // rush
             // 
             this.rush.AutoSize = true;
-            this.rush.Location = new System.Drawing.Point(158, 246);
+            this.rush.Location = new System.Drawing.Point(158, 192);
             this.rush.Name = "rush";
             this.rush.Size = new System.Drawing.Size(63, 21);
             this.rush.TabIndex = 3;
@@ -212,7 +263,7 @@ namespace Client.FormIhm
             // continuation
             // 
             this.continuation.AutoSize = true;
-            this.continuation.Location = new System.Drawing.Point(158, 183);
+            this.continuation.Location = new System.Drawing.Point(158, 143);
             this.continuation.Name = "continuation";
             this.continuation.Size = new System.Drawing.Size(109, 21);
             this.continuation.TabIndex = 2;
@@ -309,6 +360,16 @@ namespace Client.FormIhm
             this.compagnie.TabIndex = 0;
             this.compagnie.Text = "Compagnie";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(158, 239);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(91, 21);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Prioritaire";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // PIM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -375,5 +436,11 @@ namespace Client.FormIhm
         private System.Windows.Forms.Label ligne;
         private System.Windows.Forms.Label compagnie;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem etatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CreateBagage;
+        private System.Windows.Forms.ToolStripMenuItem FindBagage;
+        private System.Windows.Forms.ToolStripMenuItem déconnecterToolStripMenuItem;
+        private System.Windows.Forms.Button Creer;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
