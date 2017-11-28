@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -60,7 +61,7 @@ namespace Client.FormIhm
             this.textBox1.Enabled = false;
             this.textBox2.Enabled = false;
             this.textBox3.Enabled = false;
-            this.textBox4.Enabled = false;
+            
             this.textBox5.Enabled = false;
             this.textBox6.Enabled = false;
             this.textBox7.Enabled = false;
@@ -79,7 +80,7 @@ namespace Client.FormIhm
             this.bagage.Visible = true;
             this.textBox2.Enabled = false;
             this.textBox3.Enabled = false;
-            this.textBox4.Enabled = false;
+            
             this.textBox5.Enabled = false;
             this.textBox6.Enabled = false;
             this.textBox7.Enabled = false;
@@ -106,7 +107,6 @@ namespace Client.FormIhm
             this.recherche.Visible = true;
             this.textBox2.Enabled = false;
             this.textBox3.Enabled = false;
-            this.textBox4.Enabled = false;
             this.textBox5.Enabled = false;
             this.textBox6.Enabled = false;
             this.textBox7.Enabled = false;
@@ -128,7 +128,7 @@ namespace Client.FormIhm
             this.textBox1.Enabled = true;
             this.textBox2.Enabled = true;
             this.textBox3.Enabled = true;
-            this.textBox4.Enabled = true;
+            
             this.textBox5.Enabled = true;
             this.textBox6.Enabled = true;
             this.textBox7.Enabled = true;
@@ -189,11 +189,19 @@ namespace Client.FormIhm
                     this.OnPimStateChanged(PimState.SelectionBagage);                   
                 }
             }
-            
-            catch(Exception exception)
+            catch (AggregateException exception)
             {
-                this.OnPimStateChanged(PimState.Deconnecter);
-                MessageBox.Show("Error occurs");
+                MessageBox.Show("Serveur non accesible");
+            }
+
+            catch (CommunicationException exp)
+            {
+                MessageBox.Show("Probleme de communication entre le client et le serveur");
+            }
+
+            catch (Exception exception)
+            {
+                MessageBox.Show("Une erreur s'est produite dans le traitement de votre demande : "+exception.GetType().ToString());
             }
         }
 
@@ -225,14 +233,11 @@ namespace Client.FormIhm
         private void Creer_Click(object sender, EventArgs e)
         {
             Client.FormIhm.ServiceReferencePim.BagageDefinition bagage = new Client.FormIhm.ServiceReferencePim.BagageDefinition();
-            bagage.Compagnie = this.textBox2.Text.Substring(0,3);
-            bagage.DateVol = DateTime.ParseExact(this.textBox5.Text, "yyyy-MM-dd",
+            bagage.Compagnie = this.textBox2.Text;
+            bagage.DateVol = DateTime.ParseExact(this.textBox5.Text, "yyyy-MM-dd hh:mm:ss",
                                      System.Globalization.CultureInfo.InvariantCulture); ;
-            //Récupère seulement les trois premieres lettres de la destination
-            bagage.Itineraire = this.textBox6.Text.Substring(0,3);
-            bagage.Ligne = this.textBox3.Text.Substring(0, 5);
             bagage.Itineraire = this.textBox6.Text;
-            //bagage.classe
+            bagage.Ligne = this.textBox3.Text;
             bagage.CodeIata = this.textBox1.Text;
 
             if (this.checkBox1.Checked)
@@ -247,11 +252,7 @@ namespace Client.FormIhm
             if (this.continuation.Checked)
                 bagage.EnContinuation = true;
             else bagage.EnContinuation = false;
-
-
             int idBagage = proxy.CreateBagage(bagage);
-
-
         }
     }
 }

@@ -46,6 +46,7 @@ namespace Client.FormIhm
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.resultat = new System.Windows.Forms.GroupBox();
             this.bagage = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.Creer = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -55,13 +56,11 @@ namespace Client.FormIhm
             this.itineraire = new System.Windows.Forms.Label();
             this.vol = new System.Windows.Forms.GroupBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.jour = new System.Windows.Forms.Label();
             this.ligne = new System.Windows.Forms.Label();
             this.compagnie = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.recherche.SuspendLayout();
@@ -226,6 +225,16 @@ namespace Client.FormIhm
             this.bagage.TabStop = false;
             this.bagage.Text = "Bagage";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(158, 239);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(91, 21);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "Prioritaire";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Creer
             // 
             this.Creer.Location = new System.Drawing.Point(266, 259);
@@ -239,15 +248,17 @@ namespace Client.FormIhm
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(158, 96);
+            this.textBox7.MaxLength = 1;
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(143, 22);
+            this.textBox7.Size = new System.Drawing.Size(47, 22);
             this.textBox7.TabIndex = 5;
             // 
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(158, 38);
+            this.textBox6.MaxLength = 3;
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(143, 22);
+            this.textBox6.Size = new System.Drawing.Size(47, 22);
             this.textBox6.TabIndex = 4;
             // 
             // rush
@@ -291,7 +302,6 @@ namespace Client.FormIhm
             // vol
             // 
             this.vol.Controls.Add(this.textBox5);
-            this.vol.Controls.Add(this.textBox4);
             this.vol.Controls.Add(this.textBox3);
             this.vol.Controls.Add(this.textBox2);
             this.vol.Controls.Add(this.jour);
@@ -308,29 +318,26 @@ namespace Client.FormIhm
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(178, 159);
+            this.textBox5.MaxLength = 19;
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(171, 22);
             this.textBox5.TabIndex = 6;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(296, 90);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(53, 22);
-            this.textBox4.TabIndex = 5;
+            this.textBox5.Text = "yyyy-MM-dd HH:mm:ss";
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(178, 90);
+            this.textBox3.MaxLength = 5;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(99, 22);
+            this.textBox3.Size = new System.Drawing.Size(69, 22);
             this.textBox3.TabIndex = 4;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(178, 38);
+            this.textBox2.MaxLength = 3;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(171, 22);
+            this.textBox2.Size = new System.Drawing.Size(44, 22);
             this.textBox2.TabIndex = 3;
             // 
             // jour
@@ -359,16 +366,6 @@ namespace Client.FormIhm
             this.compagnie.Size = new System.Drawing.Size(79, 17);
             this.compagnie.TabIndex = 0;
             this.compagnie.Text = "Compagnie";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(158, 239);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(91, 21);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Prioritaire";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // PIM
             // 
@@ -429,7 +426,6 @@ namespace Client.FormIhm
         private System.Windows.Forms.Label itineraire;
         private System.Windows.Forms.GroupBox vol;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label jour;
