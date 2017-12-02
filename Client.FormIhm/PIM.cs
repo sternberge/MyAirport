@@ -165,7 +165,7 @@ namespace Client.FormIhm
         {
             try
             {
-                Client.FormIhm.ServiceReferencePim.BagageDefinition monBagage = proxy.GetBagageByCodeIataAsync(this.textBox1.Text).Result;
+                Client.FormIhm.ServiceReferencePim.BagageDefinition monBagage = proxy.GetBagageByCodeIata(this.textBox1.Text);
 
                 if (monBagage != null)
                 {
@@ -173,6 +173,8 @@ namespace Client.FormIhm
                     var bagages = monBagage;
                     this.textBox2.Text = bagages.Compagnie.ToString();
                     this.textBox2.Enabled = false;
+                    this.textBox3.Text = bagages.Ligne.ToString();
+                    this.textBox3.Enabled = false;
                     this.textBox5.Text = bagages.DateVol.ToString();
                     this.textBox5.Enabled = false;
                     this.textBox6.Text = bagages.Itineraire.ToString();
@@ -191,38 +193,41 @@ namespace Client.FormIhm
             }
             catch (AggregateException exception)
             {
-                MessageBox.Show("Serveur non accesible");
+                this.listBox1.Items.Clear();
+                this.listBox1.Items.Add("Serveur non disponible");
             }
 
-            catch (CommunicationException exp)
+            catch(EndpointNotFoundException exp)
             {
-                MessageBox.Show("Probleme de communication entre le client et le serveur");
+                this.listBox1.Items.Clear();
+                this.listBox1.Items.Add("WebService non disponible");
             }
 
-            catch (Exception exception)
+            catch (FaultException excp)
             {
-                MessageBox.Show("Une erreur s'est produite dans le traitement de votre demande : "+exception.GetType().ToString());
+                this.listBox1.Items.Clear();
+                this.listBox1.Items.Add("Une erreur s'est produite dans le traitement de votre demande");
+                this.listBox1.Items.Add("\nCode: " + excp.Code.Name);
+                this.listBox1.Items.Add("\nReason: " + excp.Reason);
             }
+
         }
 
-       
+
 
         private void réinitialiserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.OnPimStateChanged(PimState.SelectionBagage);
-            //this.SelectionBagage();
         }
 
         private void CreateBagage_Click(object sender, EventArgs e)
         {
             this.OnPimStateChanged(PimState.CreationBagage);
-            //this.CreationBagage();
         }
 
         private void FindBagage_Click(object sender, EventArgs e)
         {
             this.OnPimStateChanged(PimState.SelectionBagage);
-            //this.SelectionBagage();
         }
 
         private void déconnecterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -253,6 +258,8 @@ namespace Client.FormIhm
                 bagage.EnContinuation = true;
             else bagage.EnContinuation = false;
             int idBagage = proxy.CreateBagage(bagage);
+            MessageBox.Show("Votre Bagage a ete crée");
+            this.OnPimStateChanged(PimState.SelectionBagage);
         }
     }
 }

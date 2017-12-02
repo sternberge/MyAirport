@@ -85,17 +85,19 @@ namespace MyAirport.Pim.Models
 
                 using (SqlDataReader sdr = cmd.ExecuteReader())
                 {
+                    bagRes = new BagageDefinition();
                     while (sdr.Read())
                     {
-                        bagRes = new BagageDefinition();
-
+                        
                         bagRes.IdBagage = sdr.GetInt32(sdr.GetOrdinal("id_bagage"));
                         bagRes.CodeIata = sdr.GetString(sdr.GetOrdinal("code_iata"));
+                        if (!sdr.IsDBNull(sdr.GetOrdinal("prioritaire")))
+                            bagRes.Prioritaire = sdr.GetBoolean(sdr.GetOrdinal("prioritaire"));
+                        else bagRes.Prioritaire = false;
                         bagRes.Compagnie = sdr.GetString(sdr.GetOrdinal("compagnie"));
                         bagRes.Ligne = sdr.GetString(sdr.GetOrdinal("ligne"));
                         bagRes.DateVol = sdr.GetDateTime(sdr.GetOrdinal("date_creation"));
                         bagRes.Itineraire = sdr.GetString(sdr.GetOrdinal("escale"));
-                        bagRes.Prioritaire = sdr.GetBoolean(sdr.GetOrdinal("prioritaire"));
                         bagRes.EnContinuation = sdr.GetBoolean(sdr.GetOrdinal("continuation"));
                         bagRes.Rush = sdr.GetBoolean(sdr.GetOrdinal("rush"));
 

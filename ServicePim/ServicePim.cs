@@ -13,6 +13,8 @@ namespace MyAirport.Pim.Service
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class ServicePim : IServicePim
     {
+        int NbAppelsTotal = 0;
+        int NbAppelsInstance = 0;
         public int CreateBagage(BagageDefinition bag)
         {
             Factory.Model.CreateBagage(bag);
@@ -21,10 +23,17 @@ namespace MyAirport.Pim.Service
 
         public BagageDefinition GetBagageByCodeIata(string codeIata)
         {
+            NbAppelsTotal++;
+            this.NbAppelsInstance++;
             List<MyAirport.Pim.Entities.BagageDefinition> maListeBagage = new List<MyAirport.Pim.Entities.BagageDefinition>();
             maListeBagage = Factory.Model.GetBagage((codeIata));
-            if (maListeBagage.Count == 1)
-                return maListeBagage[0];
+            if (maListeBagage != null)
+            {
+                if (maListeBagage.Count == 1)
+                    return maListeBagage[0];
+                else
+                    throw new FaultException(new FaultReason("Il existe " + maListeBagage.Count + " bagages avec le code Iata demandé"), new FaultCode("MultipleBagage"));
+            }
             else
                 return null;
         }
@@ -32,9 +41,6 @@ namespace MyAirport.Pim.Service
         public BagageDefinition GetBagageById(int idBagage)
         {
             return MyAirport.Pim.Models.Factory.Model.GetBagage(idBagage);
-        }
-
-
-        
+        }       
     }
 }

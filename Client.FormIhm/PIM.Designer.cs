@@ -46,6 +46,7 @@ namespace Client.FormIhm
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.resultat = new System.Windows.Forms.GroupBox();
             this.bagage = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.Creer = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
@@ -190,10 +191,12 @@ namespace Client.FormIhm
             // 
             // textBox1
             // 
+            this.textBox1.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.textBox1.Location = new System.Drawing.Point(111, 41);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(537, 22);
             this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "005412457800";
             // 
             // resultat
             // 
@@ -225,6 +228,15 @@ namespace Client.FormIhm
             this.bagage.TabStop = false;
             this.bagage.Text = "Bagage";
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(0, 239);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(418, 148);
+            this.listBox1.TabIndex = 4;
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -247,19 +259,23 @@ namespace Client.FormIhm
             // 
             // textBox7
             // 
+            this.textBox7.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.textBox7.Location = new System.Drawing.Point(158, 96);
             this.textBox7.MaxLength = 1;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(47, 22);
             this.textBox7.TabIndex = 5;
+            this.textBox7.Text = "1";
             // 
             // textBox6
             // 
+            this.textBox6.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.textBox6.Location = new System.Drawing.Point(158, 38);
             this.textBox6.MaxLength = 3;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(47, 22);
             this.textBox6.TabIndex = 4;
+            this.textBox6.Text = "BKK";
             // 
             // rush
             // 
@@ -301,6 +317,7 @@ namespace Client.FormIhm
             // 
             // vol
             // 
+            this.vol.Controls.Add(this.listBox1);
             this.vol.Controls.Add(this.textBox5);
             this.vol.Controls.Add(this.textBox3);
             this.vol.Controls.Add(this.textBox2);
@@ -317,28 +334,33 @@ namespace Client.FormIhm
             // 
             // textBox5
             // 
+            this.textBox5.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.textBox5.Location = new System.Drawing.Point(178, 159);
             this.textBox5.MaxLength = 19;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(171, 22);
+            this.textBox5.Size = new System.Drawing.Size(158, 22);
             this.textBox5.TabIndex = 6;
             this.textBox5.Text = "yyyy-MM-dd HH:mm:ss";
             // 
             // textBox3
             // 
+            this.textBox3.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.textBox3.Location = new System.Drawing.Point(178, 90);
             this.textBox3.MaxLength = 5;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(69, 22);
             this.textBox3.TabIndex = 4;
+            this.textBox3.Text = "5624";
             // 
             // textBox2
             // 
+            this.textBox2.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.textBox2.Location = new System.Drawing.Point(178, 38);
             this.textBox2.MaxLength = 3;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(44, 22);
+            this.textBox2.Size = new System.Drawing.Size(43, 22);
             this.textBox2.TabIndex = 3;
+            this.textBox2.Text = "LH";
             // 
             // jour
             // 
@@ -438,5 +460,6 @@ namespace Client.FormIhm
         private System.Windows.Forms.ToolStripMenuItem déconnecterToolStripMenuItem;
         private System.Windows.Forms.Button Creer;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
