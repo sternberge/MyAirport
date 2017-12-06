@@ -61,15 +61,9 @@ namespace MyAirport.Pim.Models
                         bagRes.Rush = sdr.GetBoolean(sdr.GetOrdinal("rush"));
                     }
                 }
-
-                    
-
                 cnx.Close();
-
                 return bagRes;
             }
-
-            //throw new NotImplementedException();
         }
 
         public override List<BagageDefinition> GetBagage(string codeIataBagage)
@@ -100,16 +94,13 @@ namespace MyAirport.Pim.Models
                         bagRes.Itineraire = sdr.GetString(sdr.GetOrdinal("escale"));
                         bagRes.EnContinuation = sdr.GetBoolean(sdr.GetOrdinal("continuation"));
                         bagRes.Rush = sdr.GetBoolean(sdr.GetOrdinal("rush"));
-
+                        Console.WriteLine(bagRes.Compagnie);
                         bagsRes.Add(bagRes);
                     }
-                }
-                    
+                }                    
                 cnx.Close();
-
                 return bagsRes;
             }
-                //throw new NotImplementedException();
         }
 
         public override int CreateBagage(BagageDefinition monBagage)
@@ -127,9 +118,15 @@ namespace MyAirport.Pim.Models
                     cmd.Parameters.AddWithValue("@prioritaire", 1);
                 else cmd.Parameters.AddWithValue("@prioritaire", 0);
 
+                if(monBagage.Itineraire.Length<3)
+                    cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire);
+                else
+                    cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire.Substring(0,3));
+                if(monBagage.Compagnie.Length<3)
+                    cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie);
+                else
+                    cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie.Substring(0,3));
 
-                cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire);
-                cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie);
                 cmd.Parameters.AddWithValue("@ligne", monBagage.Ligne);
                 if(monBagage.EnContinuation)
                     cmd.Parameters.AddWithValue("@continuation", 'Y');

@@ -185,11 +185,6 @@ namespace Client.FormIhm
                         this.continuation.Enabled = false;
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Code Iata incorrect");
-                    this.OnPimStateChanged(PimState.SelectionBagage);                   
-                }
             }
             catch (AggregateException exception)
             {
@@ -258,7 +253,8 @@ namespace Client.FormIhm
                 bagage.EnContinuation = true;
             else bagage.EnContinuation = false;
             int idBagage = proxy.CreateBagage(bagage);
-            MessageBox.Show("Votre Bagage a ete crée");
+            this.listBox1.Items.Clear();
+            this.listBox1.Items.Add("Votre bagage a été crée");
             this.OnPimStateChanged(PimState.SelectionBagage);
         }
     }
