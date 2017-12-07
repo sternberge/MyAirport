@@ -186,13 +186,13 @@ namespace Client.FormIhm
                     }
                 }
             }
-            catch (AggregateException exception)
+            catch (AggregateException)
             {
                 this.listBox1.Items.Clear();
                 this.listBox1.Items.Add("Serveur non disponible");
             }
 
-            catch(EndpointNotFoundException exp)
+            catch(EndpointNotFoundException)
             {
                 this.listBox1.Items.Clear();
                 this.listBox1.Items.Add("WebService non disponible");
@@ -205,7 +205,6 @@ namespace Client.FormIhm
                 this.listBox1.Items.Add("\nCode: " + excp.Code.Name);
                 this.listBox1.Items.Add("\nReason: " + excp.Reason);
             }
-
         }
 
 
@@ -252,10 +251,21 @@ namespace Client.FormIhm
             if (this.continuation.Checked)
                 bagage.EnContinuation = true;
             else bagage.EnContinuation = false;
-            int idBagage = proxy.CreateBagage(bagage);
-            this.listBox1.Items.Clear();
-            this.listBox1.Items.Add("Votre bagage a été crée");
-            this.OnPimStateChanged(PimState.SelectionBagage);
+            try
+            {
+                int idBagage = proxy.CreateBagage(bagage);
+                this.listBox1.Items.Clear();
+                this.listBox1.Items.Add("Votre bagage a été crée");
+                this.OnPimStateChanged(PimState.SelectionBagage);
+            }
+            catch (FaultException excp)
+            {
+                this.listBox1.Items.Clear();
+                this.listBox1.Items.Add("Une erreur s'est produite dans le traitement de votre demande");
+                this.listBox1.Items.Add("\nCode: " + excp.Code.Name);
+                this.listBox1.Items.Add("\nReason: " + excp.Reason);
+            }
+
         }
     }
 }

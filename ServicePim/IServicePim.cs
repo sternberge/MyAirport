@@ -1,5 +1,6 @@
 ﻿using MyAirport.Pim.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,6 +18,7 @@ namespace MyAirport.Pim.Service
         BagageDefinition GetBagageByCodeIata(string codeIata);
         [OperationContract]
         int CreateBagage(BagageDefinition bag);
+        
     }
 }
 

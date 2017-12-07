@@ -1,6 +1,7 @@
 ﻿using MyAirport.Pim.Entities;
 using MyAirport.Pim.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,7 +18,15 @@ namespace MyAirport.Pim.Service
         int NbAppelsInstance = 0;
         public int CreateBagage(BagageDefinition bag)
         {
-            Factory.Model.CreateBagage(bag);
+            try
+            {
+                Factory.Model.CreateBagage(bag);
+            }
+            catch (ArgumentException)
+            {
+                throw new FaultException(new FaultReason("La Compagnie saisie n'existe pas"));
+
+            }
             return 0;
         }
 
@@ -33,6 +42,7 @@ namespace MyAirport.Pim.Service
                     return maListeBagage[0];
                 else
                     throw new FaultException(new FaultReason("Il existe " + maListeBagage.Count + " bagages avec le code Iata demandé"), new FaultCode("MultipleBagage"));
+                
             }
             else
                 return null;
@@ -41,6 +51,8 @@ namespace MyAirport.Pim.Service
         public BagageDefinition GetBagageById(int idBagage)
         {
             return MyAirport.Pim.Models.Factory.Model.GetBagage(idBagage);
-        }       
+        }
+        
+        
     }
 }

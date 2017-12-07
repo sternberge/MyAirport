@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using MyAirport.Pim.Entities;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Collections;
 
 namespace MyAirport.Pim.Models
 {
     public class Sql : AbstractDefinition
     {
+        /// divers requetes exécutées dans les méthodes de classe
         string strCnx = ConfigurationManager.ConnectionStrings["MyAiport.Pim.Settings.DbConnect"].ConnectionString;
 
         string commandGetBagageIata = "SELECT b.ID_BAGAGE, c.NOM as compagnie, b.CODE_IATA, b.LIGNE, b.DATE_CREATION, b.ESCALE, cc.PRIORITAIRE ,cast(iif(b.CONTINUATION='N',0,1) as bit) as Continuation, cast(iif(bp.PARTICULARITE is null, 0, 1) as bit) as 'RUSH' " +
@@ -35,6 +37,12 @@ namespace MyAirport.Pim.Models
         
         string cmdCreateBagageString2 = "INSERT INTO BAGAGE_A_POUR_PARTICULARITE VALUES (@idBagage, @particularite)";
 
+        string getAllCodeOaci = "select code_oaci from COMPAGNIE";
+        /// <summary>
+        /// Renvoie le bagage ayant l'id passé en parametre
+        /// </summary>
+        /// <param name="idBagage"></param>
+        /// <returns></returns>
         public override BagageDefinition GetBagage(int idBagage)
         {
             BagageDefinition bagRes = null;
@@ -66,6 +74,11 @@ namespace MyAirport.Pim.Models
             }
         }
 
+        /// <summary>
+        /// Renvoie une liste de bagage ayant le code IATA passé en parametre
+        /// </summary>
+        /// <param name="codeIataBagage"></param>
+        /// <returns></returns>
         public override List<BagageDefinition> GetBagage(string codeIataBagage)
         {
             List<BagageDefinition> bagsRes = new List<BagageDefinition>();
@@ -103,48 +116,81 @@ namespace MyAirport.Pim.Models
             }
         }
 
+        /// <summary>
+        /// Creer un nouveau bagage en checkant que la compagnie est bien existante
+        /// </summary>
+        /// <param name="monBagage"></param>
+        /// <returns></returns>
         public override int CreateBagage(BagageDefinition monBagage)
         {
-            
+            long idNew = 0;
             using (SqlConnection cnx = new SqlConnection(strCnx))
             {
                 SqlCommand cmd = new SqlCommand(this.cmdCreateBagageString, cnx);
                 SqlCommand cmd2 = new SqlCommand(this.cmdCreateBagageString2, cnx);
-                cmd.Parameters.AddWithValue("@codeIata", monBagage.CodeIata);
-                cmd.Parameters.AddWithValue("@dateCreation", (System.Data.SqlTypes.SqlDateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))));
-                //cmd.Parameters.AddWithValue("@dateCreation", "2015-10-01 03:06:33.000");
+               
+                if (checkCompagnie(monBagage.Compagnie))
+                {
+                    cnx.Open();
+                    cmd.Parameters.AddWithValue("@codeIata", monBagage.CodeIata);
+                    cmd.Parameters.AddWithValue("@dateCreation", (System.Data.SqlTypes.SqlDateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))));
 
-                if (monBagage.Prioritaire)
-                    cmd.Parameters.AddWithValue("@prioritaire", 1);
-                else cmd.Parameters.AddWithValue("@prioritaire", 0);
+                    if (monBagage.Prioritaire)
+                        cmd.Parameters.AddWithValue("@prioritaire", 1);
+                    else cmd.Parameters.AddWithValue("@prioritaire", 0);
 
-                if(monBagage.Itineraire.Length<3)
-                    cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire);
+                    if (monBagage.Itineraire.Length < 3)
+                        cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire);
+                    else
+                        cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire.Substring(0, 3));
+                    if (monBagage.Compagnie.Length < 3)
+                        cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie);
+                    else
+                        cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie.Substring(0, 3));
+
+                    cmd.Parameters.AddWithValue("@ligne", monBagage.Ligne);
+                    if (monBagage.EnContinuation)
+                        cmd.Parameters.AddWithValue("@continuation", 'Y');
+                    else
+                        cmd.Parameters.AddWithValue("@continuation", 'N');
+                    idNew = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (monBagage.Rush)
+                    {
+                        cmd2.Parameters.AddWithValue("@idBagage", idNew);
+                        cmd2.Parameters.AddWithValue("@particularite", 15);
+                        cmd2.ExecuteScalar();
+                    }
+                    cnx.Close();
+                }
                 else
-                    cmd.Parameters.AddWithValue("@itineraire", monBagage.Itineraire.Substring(0,3));
-                if(monBagage.Compagnie.Length<3)
-                    cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie);
-                else
-                    cmd.Parameters.AddWithValue("@compagnie", monBagage.Compagnie.Substring(0,3));
-
-                cmd.Parameters.AddWithValue("@ligne", monBagage.Ligne);
-                if(monBagage.EnContinuation)
-                    cmd.Parameters.AddWithValue("@continuation", 'Y');
-                else
-                    cmd.Parameters.AddWithValue("@continuation", 'N');
-                
-                
-                cnx.Open();
-                long idNew= Convert.ToInt32(cmd.ExecuteScalar());
-                Console.WriteLine(idNew);
-                cmd2.Parameters.AddWithValue("@idBagage", idNew);
-                cmd2.Parameters.AddWithValue("@particularite", 15);
-                cmd2.ExecuteScalar();
-
-                cnx.Close();
-                return (int)idNew;
+                {
+                    throw new ArgumentException("cie nok");                   
+                }
             }
-                return 0;
+            return (int)idNew;
+        }
+
+        public Boolean checkCompagnie(String compagnie)
+        {
+            Boolean monBool = false;
+            using (SqlConnection cnx = new SqlConnection(strCnx))
+            {
+                SqlCommand cmd3 = new SqlCommand(this.getAllCodeOaci, cnx);
+                cnx.Open();
+                ArrayList maList = new ArrayList();
+                using (SqlDataReader sdr = cmd3.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        maList.Add(sdr.GetString(0));
+                    }
+                }
+                if (maList.Contains(compagnie))
+                {
+                    monBool = true;
+                }
+            }
+            return monBool;
         }
     }
 }

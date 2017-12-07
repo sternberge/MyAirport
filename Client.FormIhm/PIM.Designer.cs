@@ -55,6 +55,7 @@ namespace Client.FormIhm
             this.classe = new System.Windows.Forms.Label();
             this.itineraire = new System.Windows.Forms.Label();
             this.vol = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -308,6 +309,7 @@ namespace Client.FormIhm
             // 
             // vol
             // 
+            this.vol.Controls.Add(this.label2);
             this.vol.Controls.Add(this.listBox1);
             this.vol.Controls.Add(this.textBox5);
             this.vol.Controls.Add(this.textBox3);
@@ -322,6 +324,15 @@ namespace Client.FormIhm
             this.vol.TabIndex = 0;
             this.vol.TabStop = false;
             this.vol.Text = "Vol";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 176);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(162, 17);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "(yyyy-MM-dd HH:mm:ss)";
             // 
             // listBox1
             // 
@@ -340,7 +351,6 @@ namespace Client.FormIhm
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(158, 22);
             this.textBox5.TabIndex = 6;
-            this.textBox5.Text = "yyyy-MM-dd HH:mm:ss";
             // 
             // textBox3
             // 
@@ -461,5 +471,6 @@ namespace Client.FormIhm
         private System.Windows.Forms.Button Creer;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label2;
     }
 }
