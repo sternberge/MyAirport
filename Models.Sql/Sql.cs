@@ -37,7 +37,7 @@ namespace MyAirport.Pim.Models
         
         string cmdCreateBagageString2 = "INSERT INTO BAGAGE_A_POUR_PARTICULARITE VALUES (@idBagage, @particularite)";
 
-        string getAllCodeOaci = "select code_oaci from COMPAGNIE";
+        string getAllCodeIata = "select code_iata from COMPAGNIE";
         /// <summary>
         /// Renvoie le bagage ayant l'id passé en parametre
         /// </summary>
@@ -170,12 +170,17 @@ namespace MyAirport.Pim.Models
             return (int)idNew;
         }
 
+        /// <summary>
+        /// Methode qui check si la compagnie passée en parametre est contenue dans la table compagnie sql
+        /// </summary>
+        /// <param name="compagnie"></param>
+        /// <returns></returns>
         public Boolean checkCompagnie(String compagnie)
         {
             Boolean monBool = false;
             using (SqlConnection cnx = new SqlConnection(strCnx))
             {
-                SqlCommand cmd3 = new SqlCommand(this.getAllCodeOaci, cnx);
+                SqlCommand cmd3 = new SqlCommand(this.getAllCodeIata, cnx);
                 cnx.Open();
                 ArrayList maList = new ArrayList();
                 using (SqlDataReader sdr = cmd3.ExecuteReader())
@@ -185,9 +190,13 @@ namespace MyAirport.Pim.Models
                         maList.Add(sdr.GetString(0));
                     }
                 }
-                if (maList.Contains(compagnie))
+                foreach (String item in maList)
                 {
-                    monBool = true;
+                    if (item.Contains(compagnie))
+                    {
+                        monBool = true;
+                        break;
+                    }
                 }
             }
             return monBool;

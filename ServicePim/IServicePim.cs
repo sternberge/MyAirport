@@ -15,6 +15,7 @@ namespace MyAirport.Pim.Service
         [OperationContract]
         BagageDefinition GetBagageById(int idBagage);
         [OperationContract]
+        [FaultContract(typeof(MultipleBagageFault))]
         BagageDefinition GetBagageByCodeIata(string codeIata);
         [OperationContract]
         int CreateBagage(BagageDefinition bag);

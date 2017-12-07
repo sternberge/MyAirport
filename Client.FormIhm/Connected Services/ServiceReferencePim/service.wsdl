@@ -19,6 +19,9 @@
   <wsdl:message name="IServicePim_GetBagageByCodeIata_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetBagageByCodeIataResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicePim_GetBagageByCodeIata_MultipleBagageFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MyAirport.Pim.Entities" name="detail" element="q1:MultipleBagageFault" />
+  </wsdl:message>
   <wsdl:message name="IServicePim_CreateBagage_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateBagage" />
   </wsdl:message>
@@ -33,6 +36,7 @@
     <wsdl:operation name="GetBagageByCodeIata">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePim/GetBagageByCodeIata" message="tns:IServicePim_GetBagageByCodeIata_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicePim/GetBagageByCodeIataResponse" message="tns:IServicePim_GetBagageByCodeIata_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IServicePim/GetBagageByCodeIataMultipleBagageFaultFault" name="MultipleBagageFaultFault" message="tns:IServicePim_GetBagageByCodeIata_MultipleBagageFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateBagage">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePim/CreateBagage" message="tns:IServicePim_CreateBagage_InputMessage" />
@@ -58,6 +62,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="MultipleBagageFaultFault">
+        <soap:fault use="literal" name="MultipleBagageFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="CreateBagage">
       <soap:operation soapAction="http://tempuri.org/IServicePim/CreateBagage" style="document" />

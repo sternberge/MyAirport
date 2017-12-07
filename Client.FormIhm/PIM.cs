@@ -9,6 +9,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.FormIhm.ServiceReferencePim;
 
 namespace Client.FormIhm
 {
@@ -117,7 +118,6 @@ namespace Client.FormIhm
             this.rush.Enabled = false;
             this.button1.Enabled = true;
             this.Creer.Enabled = false;
-
         }
 
         public void CreationBagage()
@@ -127,8 +127,7 @@ namespace Client.FormIhm
             this.bagage.Visible = true;
             this.textBox1.Enabled = true;
             this.textBox2.Enabled = true;
-            this.textBox3.Enabled = true;
-            
+            this.textBox3.Enabled = true;           
             this.textBox5.Enabled = true;
             this.textBox6.Enabled = true;
             this.textBox7.Enabled = true;
@@ -165,8 +164,7 @@ namespace Client.FormIhm
         {
             try
             {
-                Client.FormIhm.ServiceReferencePim.BagageDefinition monBagage = proxy.GetBagageByCodeIata(this.textBox1.Text);
-
+                BagageDefinition monBagage = proxy.GetBagageByCodeIata(this.textBox1.Text);
                 if (monBagage != null)
                 {
                     this.OnPimStateChanged(PimState.AffichageBagage);
@@ -196,6 +194,17 @@ namespace Client.FormIhm
             {
                 this.listBox1.Items.Clear();
                 this.listBox1.Items.Add("WebService non disponible");
+            }
+
+            catch (FaultException<MultipleBagageFault> excp)
+            {
+                List <BagageDefinition> Bagages = new List<BagageDefinition>(excp.Detail.ListBagages);
+                this.listBox1.Items.Clear();
+                foreach (BagageDefinition i in Bagages)
+                {
+                    this.listBox1.Items.Add(i.IdBagage+"\n");
+                }
+                
             }
 
             catch (FaultException excp)

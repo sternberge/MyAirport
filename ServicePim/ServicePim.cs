@@ -40,6 +40,16 @@ namespace MyAirport.Pim.Service
             {
                 if (maListeBagage.Count == 1)
                     return maListeBagage[0];
+
+                else if (maListeBagage.Count > 1)
+                {
+                    MultipleBagageFault bagages = new MultipleBagageFault();
+                    bagages.CodeIata = codeIata;
+                    bagages.ListBagages = maListeBagage;
+                    bagages.Message = "Il existe " + maListeBagage.Count + " bagages avec le code Iata demandé";
+                    throw new FaultException<MultipleBagageFault>(bagages);
+                }
+
                 else
                     throw new FaultException(new FaultReason("Il existe " + maListeBagage.Count + " bagages avec le code Iata demandé"), new FaultCode("MultipleBagage"));
                 

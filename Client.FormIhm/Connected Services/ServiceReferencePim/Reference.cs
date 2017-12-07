@@ -186,6 +186,83 @@ namespace Client.FormIhm.ServiceReferencePim {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MultipleBagageFault", Namespace="http://schemas.datacontract.org/2004/07/MyAirport.Pim.Entities")]
+    [System.SerializableAttribute()]
+    public partial class MultipleBagageFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeIataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.FormIhm.ServiceReferencePim.BagageDefinition[] ListBagagesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CodeIata {
+            get {
+                return this.CodeIataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeIataField, value) != true)) {
+                    this.CodeIataField = value;
+                    this.RaisePropertyChanged("CodeIata");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.FormIhm.ServiceReferencePim.BagageDefinition[] ListBagages {
+            get {
+                return this.ListBagagesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ListBagagesField, value) != true)) {
+                    this.ListBagagesField = value;
+                    this.RaisePropertyChanged("ListBagages");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferencePim.IServicePim")]
     public interface IServicePim {
@@ -197,6 +274,7 @@ namespace Client.FormIhm.ServiceReferencePim {
         System.Threading.Tasks.Task<Client.FormIhm.ServiceReferencePim.BagageDefinition> GetBagageByIdAsync(int idBagage);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePim/GetBagageByCodeIata", ReplyAction="http://tempuri.org/IServicePim/GetBagageByCodeIataResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.FormIhm.ServiceReferencePim.MultipleBagageFault), Action="http://tempuri.org/IServicePim/GetBagageByCodeIataMultipleBagageFaultFault", Name="MultipleBagageFault", Namespace="http://schemas.datacontract.org/2004/07/MyAirport.Pim.Entities")]
         Client.FormIhm.ServiceReferencePim.BagageDefinition GetBagageByCodeIata(string codeIata);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePim/GetBagageByCodeIata", ReplyAction="http://tempuri.org/IServicePim/GetBagageByCodeIataResponse")]
