@@ -92,10 +92,10 @@ namespace MyAirport.Pim.Models
 
                 using (SqlDataReader sdr = cmd.ExecuteReader())
                 {
-                    bagRes = new BagageDefinition();
+                    
                     while (sdr.Read())
                     {
-                        
+                        bagRes = new BagageDefinition();
                         bagRes.IdBagage = sdr.GetInt32(sdr.GetOrdinal("id_bagage"));
                         bagRes.CodeIata = sdr.GetString(sdr.GetOrdinal("code_iata"));
                         if (!sdr.IsDBNull(sdr.GetOrdinal("prioritaire")))

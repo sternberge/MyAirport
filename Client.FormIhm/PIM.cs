@@ -167,21 +167,7 @@ namespace Client.FormIhm
                 BagageDefinition monBagage = proxy.GetBagageByCodeIata(this.textBox1.Text);
                 if (monBagage != null)
                 {
-                    this.OnPimStateChanged(PimState.AffichageBagage);
-                    var bagages = monBagage;
-                    this.textBox2.Text = bagages.Compagnie.ToString();
-                    this.textBox2.Enabled = false;
-                    this.textBox3.Text = bagages.Ligne.ToString();
-                    this.textBox3.Enabled = false;
-                    this.textBox5.Text = bagages.DateVol.ToString();
-                    this.textBox5.Enabled = false;
-                    this.textBox6.Text = bagages.Itineraire.ToString();
-                    this.textBox6.Enabled = false;
-                    if (bagages.EnContinuation)
-                    {
-                        this.continuation.Checked = true;
-                        this.continuation.Enabled = false;
-                    }
+                    showBagage(monBagage);
                 }
             }
             catch (AggregateException)
@@ -203,8 +189,7 @@ namespace Client.FormIhm
                 foreach (BagageDefinition i in Bagages)
                 {
                     this.listBox1.Items.Add(i.IdBagage+"\n");
-                }
-                
+                }              
             }
 
             catch (FaultException excp)
@@ -275,6 +260,35 @@ namespace Client.FormIhm
                 this.listBox1.Items.Add("\nReason: " + excp.Reason);
             }
 
+        }
+        
+
+        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (this.listBox1.SelectedItem != null)
+            {
+                BagageDefinition monBagage=proxy.GetBagageById(int.Parse(listBox1.SelectedItem.ToString()));
+                showBagage(monBagage);
+            }
+        }
+
+        public void showBagage(BagageDefinition monBagage)
+        {
+            this.OnPimStateChanged(PimState.AffichageBagage);
+            var bagages = monBagage;
+            this.textBox2.Text = bagages.Compagnie.ToString();
+            this.textBox2.Enabled = false;
+            this.textBox3.Text = bagages.Ligne.ToString();
+            this.textBox3.Enabled = false;
+            this.textBox5.Text = bagages.DateVol.ToString();
+            this.textBox5.Enabled = false;
+            this.textBox6.Text = bagages.Itineraire.ToString();
+            this.textBox6.Enabled = false;
+            if (bagages.EnContinuation)
+            {
+                this.continuation.Checked = true;
+                this.continuation.Enabled = false;
+            }
         }
     }
 }
