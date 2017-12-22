@@ -10,7 +10,8 @@ Différentes exceptions sont levées et affichées au client dans un formulaire 
 	- si le code iata recherché est inexistant<br />
 	- si le code iata recherché correspond à plusieurs bagages<br />
 	- si le webservice n'est pas démarré/accessible<br />
-Différentes vérifications de format sont réalisées du coté du serveur.<br />
+	- si l'accès au serveur SQL ne fonctionne pas<br />
+Différentes vérifications de format sont réalisées du coté du serveur. Lors de la création d'un bagage, le nom de la compagnie est vérifié.<br />
 
 <b>Installation</b><br />
 1) Cloner le projet depuis Github<br />
