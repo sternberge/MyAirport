@@ -159,7 +159,11 @@ namespace Client.FormIhm
         }
 
         
-
+        /// <summary>
+        /// Recherche bagage via code Iata à la suite du clic sur le bouton de recherche
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -223,6 +227,11 @@ namespace Client.FormIhm
             this.OnPimStateChanged(PimState.Deconnecter);
         }
 
+        /// <summary>
+        /// Creation d'un bagage à la suite d'un clic sur le bouton de creation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Creer_Click(object sender, EventArgs e)
         {
             Client.FormIhm.ServiceReferencePim.BagageDefinition bagage = new Client.FormIhm.ServiceReferencePim.BagageDefinition();
@@ -252,6 +261,7 @@ namespace Client.FormIhm
                 this.listBox1.Items.Add("Votre bagage a été crée");
                 this.OnPimStateChanged(PimState.SelectionBagage);
             }
+            // permet de catch les exception coté client
             catch (FaultException excp)
             {
                 this.listBox1.Items.Clear();
@@ -262,7 +272,7 @@ namespace Client.FormIhm
 
         }
         
-
+        // Affiche le bagage après sa sélection dans la liste box
         private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (this.listBox1.SelectedItem != null)
@@ -272,6 +282,10 @@ namespace Client.FormIhm
             }
         }
 
+        /// <summary>
+        /// Affiche le bagage passé en parametre de la methode
+        /// </summary>
+        /// <param name="monBagage"></param>
         public void showBagage(BagageDefinition monBagage)
         {
             this.OnPimStateChanged(PimState.AffichageBagage);

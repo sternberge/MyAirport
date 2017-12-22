@@ -83,12 +83,19 @@ namespace MyAirport.Pim.Models
         {
             List<BagageDefinition> bagsRes = new List<BagageDefinition>();
             BagageDefinition bagRes = null;
-
+            
             using (SqlConnection cnx = new SqlConnection(strCnx))
             {
                 SqlCommand cmd = new SqlCommand(this.commandGetBagageIata, cnx);
                 cmd.Parameters.AddWithValue("@codeIata", codeIataBagage);
-                cnx.Open();
+                try
+                {
+                    cnx.Open();
+                }
+                catch(SqlException e)
+                {
+                    throw e;
+                }
 
                 using (SqlDataReader sdr = cmd.ExecuteReader())
                 {
@@ -131,7 +138,16 @@ namespace MyAirport.Pim.Models
                
                 if (checkCompagnie(monBagage.Compagnie))
                 {
-                    cnx.Open();
+
+                    try
+                    {
+                        cnx.Open();
+                    }
+                    // Exception si la connection sql n'est pas correcte
+                    catch (SqlException e)
+                    {
+                        throw e;
+                    }
                     cmd.Parameters.AddWithValue("@codeIata", monBagage.CodeIata);
                     cmd.Parameters.AddWithValue("@dateCreation", (System.Data.SqlTypes.SqlDateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))));
 
@@ -164,6 +180,7 @@ namespace MyAirport.Pim.Models
                 }
                 else
                 {
+                    // Exception levée si le nom de la compagnie est incorrect
                     throw new ArgumentException("cie nok");                   
                 }
             }

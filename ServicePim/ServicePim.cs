@@ -3,6 +3,7 @@ using MyAirport.Pim.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -22,9 +23,15 @@ namespace MyAirport.Pim.Service
             {
                 Factory.Model.CreateBagage(bag);
             }
+            // Deux types d'exceptions sont gérés et renvoyés au client
             catch (ArgumentException)
             {
                 throw new FaultException(new FaultReason("La Compagnie saisie n'existe pas"));
+
+            }
+            catch (SqlException)
+            {
+                throw new FaultException(new FaultReason("Impossible de se connecter au serveur SQL"));
 
             }
             return 0;
@@ -35,7 +42,15 @@ namespace MyAirport.Pim.Service
             NbAppelsTotal++;
             this.NbAppelsInstance++;
             List<MyAirport.Pim.Entities.BagageDefinition> maListeBagage = new List<MyAirport.Pim.Entities.BagageDefinition>();
-            maListeBagage = Factory.Model.GetBagage((codeIata));
+            try {
+                maListeBagage = Factory.Model.GetBagage((codeIata));
+            }
+            catch (SqlException)
+            {
+                throw new FaultException(new FaultReason("Impossible de se connecter au serveur SQL"));
+
+            }
+
             if (maListeBagage != null)
             {
                 if (maListeBagage.Count == 1)
@@ -47,7 +62,7 @@ namespace MyAirport.Pim.Service
                     bagages.CodeIata = codeIata;
                     bagages.ListBagages = maListeBagage;
                     bagages.Message = "Il existe " + maListeBagage.Count + " bagages avec le code Iata demandé";
-                    throw new FaultException<MultipleBagageFault>(bagages);
+                    throw new FaultException<MultipleBagageFault>(bagages); // création d'une exception qui sera récupérée dans le client
                 }
 
                 else
